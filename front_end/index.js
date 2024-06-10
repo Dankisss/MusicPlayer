@@ -15,7 +15,7 @@ const arrayKeys = [
     'B2',
 ];
 
-const map = {
+const keyBoard = {
     a: 'C1',
     s: 'D1',
     d: 'E1',
@@ -44,7 +44,7 @@ document.addEventListener('keydown', (ev) => {
 
     console.log(`${ev.key} pressed`);
 
-    const key = map[ev.key];
+    const key = keyBoard[ev.key];
     if(key) 
         playSound(key);
 });
@@ -82,4 +82,39 @@ mediaRecorder.onstop = () => {
     audioElement.controls = true;
     audioElement.src = audioURL;
     document.body.appendChild(audioElement);
+}
+
+let id = 1;
+document.getElementById(`piano-${id}`).classList.add('active');
+
+const next = document.getElementById('next');
+const prev = document.getElementById('prev');
+
+next.addEventListener('click', (ev) => {
+    
+    document.getElementById(`piano-${id}`).classList.remove('active');
+
+    id = id == 7 ? 1 : ++id;
+
+    changePiano(id);
+})
+
+prev.addEventListener('click', (ev) => {
+    
+    document.getElementById(`piano-${id}`).classList.remove('active');
+
+    id = id == 1 ? 7 : --id;
+
+    changePiano(id);
+})
+
+function changePiano(pos) {
+    
+    document.getElementById(`piano-${pos}`).classList.add('active');
+
+    const visibleArr = Array.from(document.querySelectorAll(`#piano-${id} div`));
+
+    Object.keys(keyBoard).forEach((key, index) => {
+        keyBoard[key] = visibleArr[index].getAttribute('data-note');
+    });
 }
