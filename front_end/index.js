@@ -51,9 +51,8 @@ document.addEventListener('keydown', (ev) => {
 
 function playSound(note) {
     const audio = new Audio(`../music_sounds/${note}.mp3`);
-    const track = audioContext.createMediaElementSource(audio);
-    track.connect(audioContext.destination);
-    track.connect(destination);
+    const sound = audioContext.createMediaElementSource(audio);
+    sound.connect(audioContext.destination);
     audio.play();
 }
 
