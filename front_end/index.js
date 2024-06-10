@@ -53,6 +53,7 @@ function playSound(note) {
     const audio = new Audio(`../music_sounds/${note}.mp3`);
     const sound = audioContext.createMediaElementSource(audio);
     sound.connect(audioContext.destination);
+    sound.connect(destination);
     audio.play();
 }
 
