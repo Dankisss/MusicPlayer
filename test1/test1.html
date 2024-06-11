@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trying stuffs</title>
+    <link rel="stylesheet" href="test1.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+          <h2>PIANO</h2>
+          <div class="column volume-slider">
+            <span>Volume</span><input type="range" min="0" max="1" value="0.5" step="any">
+          </div>
+          <div class="column keys-checkbox">
+            <span>Show Keys</span><input type="checkbox" checked>
+          </div>
+        </header>
+        <div id="piano-1" class="piano-keys">
+            <div data-note="C1" class="key white"><span>a</span></div>
+            <div data-note="Db1" class="key black"><span></span></div>
+            <div data-note="D1" class="key white"><span>s</span></div>
+            <div data-note="Eb1" class="key black"><span></span></div>
+            <div data-note="E1" class="key white"><span>d</span></div>
+            <div data-note="F1" class="key white"><span>f</span></div>
+            <div data-note="Gb1" class="key black"><span></span></div>
+            <div data-note="G1" class="key white"><span>g</span></div>
+            <div data-note="Ab1" class="key black"><span></span></div>
+            <div data-note="A1" class="key white"><span>h</span></div>
+            <div data-note="Bb1" class="key black"><span></span></div>
+            <div data-note="B1" class="key white"><span>j</span></div>
+
+
+            <!-- <div data-note="C1" class="key white"><span>a</span></div>
+            <div data-note="Db1" class="key black"><span></span></div>
+            <div data-note="D1" class="key white"><span>s</span></div>
+            <div data-note="Eb1" class="key black"><span></span></div>
+            <div data-note="E1" class="key white"><span>d</span></div>
+            <div data-note="F1" class="key white"><span>f</span></div>
+            <div data-note="Gb1" class="key black"><span></span></div>
+            <div data-note="G1" class="key white"><span>g</span></div>
+            <div data-note="Ab1" class="key black"><span></span></div>
+            <div data-note="A1" class="key white"><span>h</span></div>
+            <div data-note="Bb1" class="key black"><span></span></div>
+            <div data-note="B1" class="key white"><span>j</span></div> -->
+
+        </div>
+        
+        <footer>
+            <button id="next">Next</button>
+            <button id="prev">Previous</button>
+
+            <button id="startRecording">Start Recording</button>
+            <button id="stopRecording">Stop Recording</button>
+        </footer>
+    </div>
+    <script src="test1.js"></script>
+</body>
+</html>
