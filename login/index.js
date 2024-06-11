@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 // MongoDB модел за потребител
 const userSchema = new mongoose.Schema({
     username: String,
-    password: String
+    password: String,
 });
 const User = mongoose.model('User', userSchema);
 
@@ -53,6 +53,8 @@ app.post('/login', async (req, res) => {
         if (isPasswordCorrect) {
             req.session.userId = user._id;
             return res.json({ success: true });
+        }else {
+            return res.json({success: "Incorrect password"});
         }
     }
 
