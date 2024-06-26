@@ -1,17 +1,25 @@
-const keyBoard = {
-    q: 'C1',
-    '2': 'Db1',
-    w: 'D1',
-    3: 'Eb1',   
-    e: 'E1',
-    r: 'F1',
-    5: 'Gb1',
-    t: 'G1',
-    6: 'Ab1',
-    y: 'A1',
-    7: 'Bb1',
-    u: 'B1',
-};
+const keyBoard = new Map([
+    ['q', 'C1'],
+    ['1', 'Db1'],
+    ['w', 'D1'],
+    ['2', 'Eb1'],
+    ['e', 'E1'],
+    ['r', 'F1'],
+    ['4', 'Gb1'], 
+    ['t', 'G1'],
+    ['5', 'Ab1'], 
+    ['y', 'A1'],
+    ['7', 'Bb1'],
+    ['u', 'B1'],
+    ['i', 'C2'],
+    ['8', 'Db2'],
+    ['o', 'D2'],
+    ['9', 'Eb2'],
+    ['p', 'E2'],
+    ['[', 'F2'],
+    [']', 'G2'],
+    [`\\`, 'A2']
+]);
 
 const pianoKeys = document.querySelectorAll(".piano-keys .key"),
 volumeSlider = document.querySelector(".volume-slider input"),
@@ -131,12 +139,12 @@ document.addEventListener('keydown', (ev) => {
     
     console.log(`${ev.key} pressed`);
 
-    const key = keyBoard[ev.key];
+    const key = keyBoard.get(ev.key);
     if(key)  {
-        playSound(key);
+        playSound(keyBoard.get(ev.key));
 
         recordedKeys.push({
-            note: keyBoard[ev.key],
+            note: keyBoard.get(ev.key),
             time: audioContext.currentTime - startTime,
         })
     }
@@ -215,8 +223,8 @@ const next = document.getElementById('next');
 const prev = document.getElementById('prev');
 
 next.addEventListener('click', (ev) => {
-    
-    document.getElementById(`piano-${id}`).classList.remove('active');
+    const previousKeyBoard = document.getElementById(`piano-${id}`);
+    previousKeyBoard.classList.remove('active');
 
     id = id == 4 ? 1 : ++id;
 
@@ -237,14 +245,14 @@ function changePiano(pos) {
     
     document.getElementById(`piano-${pos}`).classList.add('active');
 
-    const visibleArr = Array.from(document.querySelectorAll(`#piano-${id} div`));
+    const visibleArr = Array.from(document.querySelectorAll(`#piano-${pos} div`));
 
-    console.log(visibleArr);
-
-    console.log(Object.keys(keyBoard));//.forEach((key, index) => {
-    //     //keyBoard[key] = visibleArr[index].getAttribute('data-note');
-    //     console.log(key);
-    // });
+    const keys = Array.from(keyBoard.keys());
+    visibleArr.forEach((el, index) => {
+        if (index < keys.length) 
+            keyBoard.set(keys[index], el.getAttribute('data-note'))
+    })
+   
 }
 
 
