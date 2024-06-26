@@ -7,6 +7,25 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+    <header id="menu">
+       <span>MusicPlayer</span>
+
+        <nav class="navbar">
+            <a href="#" type="button" id="share">Search</a>
+            <a href="#">Clear</a>
+            <a href="#" >Choose file</a>
+            <a href="#">Lessons</a>
+            <a href="#">LogOut</a>
+        </nav>
+
+    </header>
+
+   
+    <!-- <div class="try">bdjhvbsdkbvskdbv</div> -->
+    <div class="try" id="history"></div>
+
+    <main>
     <div class="wrapper">
         <header>
           <h2>PIANO</h2>
@@ -118,17 +137,19 @@
         
 
         <footer>
-            <button id="next">Next</button>
-            <button id="prev">Previous</button>
+            <button class="btn" id="next">Next</button>
+            <button class="btn" id="prev">Previous</button>
 
-            <button id="preview">Preview</button>
-            <button id="export">Export current</button>
+            <button class="btn" id="preview">Preview</button>
+            <button class="btn" id="export">Export current</button>
             <input type="file" id="importMusicFile">
-            <button type="button" id="share">Share</button>
+            <!-- <button type="button" id="share">Share</button> -->
         </footer>
     </div>
     
     <div id="history"></div>
     <script src="index.js"></script>
+</main>
+
 </body>
 </html>
