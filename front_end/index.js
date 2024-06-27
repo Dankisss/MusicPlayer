@@ -23,8 +23,11 @@ const keyBoard = new Map([
 
 const pianoKeys = document.querySelectorAll(".piano-keys .key"),
 volumeSlider = document.querySelector(".volume-slider input"),
-keysCheckbox = document.querySelector(".keys-checkbox input");
-importMusicFile = document.getElementById('importMusicFile');
+keysCheckbox = document.querySelector(".keys-checkbox input"),
+importMusicFile = document.getElementById('importMusicFile'),
+greeter = document.querySelector('#history #greeter'),
+clear = document.querySelector('#clear'),
+chooseFile = document.querySelector('#chooseFile');
 
 const keys = document.querySelectorAll(".key");
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -41,7 +44,15 @@ let allKeys = [];
 
 pianoKeys.forEach(key => {
     allKeys.push(key.getAttribute('data-note')); // adding data-note value to the allKeys array
-    key.addEventListener("click", () => playSound(key.getAttribute('data-note')));
+    
+    key.addEventListener("click", () => {
+        if(recordedKeys.length === 0) {
+            greeter.innerHTML = '';
+        }
+        playSound(key.getAttribute('data-note'));
+
+       
+    })
 });
 let audio;
 
@@ -59,6 +70,7 @@ pianoKeys.forEach(key => key.classList.toggle("hide"));
 const pressedKey = (e) => {
     if (allKeys.includes(e.key))  {
         playSound(keyBoard[e.key]);
+    
         history.innerText += ` ${keyBoard[e.key]} `;
     }
 
@@ -87,11 +99,20 @@ const importRecordedKeys = (file) => {
 
 keysCheckbox.addEventListener("click", showHideKeys);
 volumeSlider.addEventListener("click", handleVolume);
-document.addEventListener("keydown", pressedKey);
+clear.addEventListener("click", () => {
+    history.innerText = '';
+    recordedKeys = [];
+})
+
+chooseFile.addEventListener("click" , (ev) => {
+    ev.preventDefault();
+    importMusicFile.click();
+});
+
 importMusicFile.addEventListener('change', (e) => {
     const file = e.target.files[0];
     
-    if (file) {
+    if (file.type === "application/json") {
         importRecordedKeys(file);
     }
 });
@@ -117,6 +138,13 @@ keys.forEach((div) => {
 
 
 const playSound = (note) => {
+
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    } else if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+
     audio = new Audio(`../music_sounds/${note}.mp3`); 
 
     const clickedKey = document.querySelector(`[data-note="${note}"]`); 
@@ -137,27 +165,23 @@ document.addEventListener('keydown', (ev) => {
     if(ev.repeat) 
         return;
     
-    console.log(`${ev.key} pressed`);
-
     const key = keyBoard.get(ev.key);
     if(key)  {
-        playSound(keyBoard.get(ev.key));
+        playSound(key);
 
+        if (recordedKeys.length === 0) {
+            history.innerHTML = '';
+        }
         recordedKeys.push({
-            note: keyBoard.get(ev.key),
+            note: key,
             time: audioContext.currentTime - startTime,
         })
+
+        history.innerText += ` ${key} `;
     }
 });
 
 document.querySelector('#preview').onclick = () => {
-    // recordedChunks = [];
-    // recordedKeys = [];
-    // startTime = audioContext.currentTime;
-    // console.log(audioContext.currentTime);
-    // mediaRecorder.start();
-    // console.log('Recording started');
-
     startTime = recordedKeys[0].time;
     
     recordedKeys.forEach(key => {

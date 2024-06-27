@@ -6,13 +6,73 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-body {
+/* body {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   background: rgb(207, 188, 164);
+} */
+
+body{
+ overflow: hidden;
+ background-color: rgb(207, 188, 164);
 }
+
+
+.try{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 80px;
+  /* border:solid black; */
+  height: 100px;
+  text-align: center;
+  padding-top: 40px;
+  overflow: auto;
+  width: 70%;
+  color: white;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 68vh;
+  background: rgb(207, 188, 164);
+  /* background-color: wheat; */
+}
+
+#menu{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  background-color: rgb(30, 29, 29);
+  /* background-color: rgb(255, 255, 255); */
+  color: white;
+  /* color: #434343; */
+}
+
+.navbar a{
+  font-size:18px;
+  color: #434343;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 30px;
+  color: white;
+  /* color: #434343; */
+}
+
+.navbar a:hover{
+  color:#888888;
+}
+
 .wrapper {
   padding: 35px 40px;
   border-radius: 20px;
@@ -164,4 +224,23 @@ header input {
   .piano-keys .white {
     width: 50px;
   }
+}
+
+footer .btn{
+  font-size: 16px;
+  padding: 0.25em;
+  width: 150px;
+  margin: 0 0.7em;
+  margin-top: 20px;
+  /* outline: none; */
+  border: none;
+  border-radius: 1em;
+  font-weight: 300;
+  background-color: #4B4B4B;
+  color:whitesmoke ;
+}
+
+.btn:hover{
+    background-color:rgb(207, 188, 164);
+    color:#000;
 }
